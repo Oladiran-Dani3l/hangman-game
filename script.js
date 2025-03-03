@@ -75,7 +75,10 @@ function gamePlay(){
     createKeyboard();
 
     // create function reset hangman 
-    resetHangman()
+    resetHangman();
+
+    // call function to sync keyboard
+    syncBothKeyboards();
 }
 function createWordDisplay(){
     wordDisplay.innerHTML = '';
@@ -132,11 +135,28 @@ function handleGuess(letter){
     }
 }
 
+function syncBothKeyboards() {
+    document.addEventListener('keydown', function (event) {
+        let pressedKey = event.key.toLowerCase();
+        console.log('Pressed Key = ' + pressedKey);
+    
+        if(pressedKey >= 'a' && pressedKey <= 'z' ){
+            let keyButton = Array.from(keyboard.children).find(keyBtn => keyBtn.textContent === pressedKey);
+    
+            if(keyButton && !keyButton.classList.contains('used')){
+                keyButton.click();
+            }
+        }
+    })
+    console.log(document);
+} 
+
 function updateWordDisplay (letter){
     const letterBoxes = wordDisplay.children;
     for (let i = 0; i < letterBoxes.length; i++){
         if(letterBoxes[i].dataset.letter === letter){
             letterBoxes[i].textContent = letter;
+            console.log(letterBoxes[i]);
         }
     }
 }
