@@ -140,9 +140,27 @@ function updateWordDisplay (letter){
         }
     }
 }
+
+function revealFullWord() {
+    const letterBoxes = document.querySelectorAll('.letter-box');
+    
+    letterBoxes.forEach(box => {
+        if (!box.textContent) {
+            box.textContent = box.dataset.letter;
+            box.classList.add('revealed');
+        }
+    });
+}
+
 function updateHangman(){
     if(wrongGuesses + 1 < hangmanParts.length){
         hangmanParts[wrongGuesses + 1].style.display ='block';
+    }
+
+    if (wrongGuesses === maxTries) {
+        revealFullWord();
+        messageElement.textContent = "Game Over! The correct word was: " + currentWord.toUpperCase();
+        messageElement.style.color = "red";
     }
 }
 function isWordComplete(){
