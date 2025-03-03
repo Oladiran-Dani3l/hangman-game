@@ -158,6 +158,12 @@ main {
     color: var(--danger-color);
 }
 
+.revealed {
+    color: var(--danger-color);
+    font-weight: bold;
+    transition: color 0.5s ease-in-out;
+}
+
 .new-game-btn {
     background-color: var(--success-color);
     color: white;
